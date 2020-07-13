@@ -9,7 +9,10 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import java.util.*
+import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
 @Service
@@ -20,7 +23,7 @@ class MainService: DefaultApi {
         mainRepository.deleteTodo(id.toInt())
     }
 
-    override fun postTodos(body: BodyDTO): Int? {
+    override fun postTodos(@ApiParam(value = "") @Valid @NotNull @RequestBody body: @Valid @NotNull BodyDTO): Int? {
         var po = TodosPO()
         po.title = body.title
         po.content = body.content
@@ -29,16 +32,14 @@ class MainService: DefaultApi {
         return mainRepository.addTodo(po)
     }
 
-    override fun putTodosId(id: String, content: String?, status: String?) {
+    override fun putTodosId(@ApiParam(required = true, value = "") @PathVariable(value = "id") @NotNull id: @NotNull String, @ApiParam(value = "") @Valid @RequestParam(required = false, value = "content") content: @Valid String?, @ApiParam(value = "") @Valid @RequestParam(required = false, value = "status") status: @Valid String?) {
         var po = TodosPO()
         po.content = content
-        if (status != null) {
-            po.status = status.toInt()
-        }
+        if (status != null) { po.status = status.toInt() }
         mainRepository.updateTodo(id.toInt(),po)
     }
 
-    override fun getTodos(title: String?, status: Int?, createdTime: String?): MutableList<InlineResponse200DTO>? {
+    override fun getTodos(@ApiParam(value = "") @Valid @RequestParam(required = false, value = "title") title: @Valid String?, @ApiParam(value = "") @Valid @RequestParam(required = false, value = "status") status: @Valid Int?, @ApiParam(value = "") @Valid @RequestParam(required = false, value = "createdTime") createdTime: @Valid String?): MutableList<InlineResponse200DTO>? {
        return mainRepository.findTodo(status,createdTime,title)
     }
 
