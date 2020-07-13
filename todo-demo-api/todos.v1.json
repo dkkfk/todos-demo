@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "todos.v1",
+    "version": "1.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/todos": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "status": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "createdTime": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "operationId": "get-todos",
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "title",
+            "description": ""
+          },
+          {
+            "type": "integer",
+            "in": "query",
+            "name": "status"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "createdTime"
+          }
+        ]
+      },
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "post-todos",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "integer"
+                }
+              }
+            },
+            "x-examples": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "put-todos-id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "in": "query",
+            "name": "content"
+          },
+          {
+            "type": "string",
+            "in": "query",
+            "name": "status"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-todos-id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

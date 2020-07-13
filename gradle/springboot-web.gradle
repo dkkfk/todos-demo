@@ -1,0 +1,5 @@
+//通用依赖项配置，不能用于gateway服务
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+}

@@ -1,0 +1,27 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+
+dependencies {
+    implementation 'me.jinuo.imf:sortinghat-spring-boot-starter:1.2.2'
+    implementation 'me.jinuo.imf:care-spring-boot-starter:3.2.5'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:$SPRINGBOOT_VERSION"
+}
+
+
+
+/*********************************  Tools  ************************************************/
+
+String env(String name, String defaultValue = "undefined") {
+    // 从启动参数读取
+    if (project.ext.has(name)) {
+        return project.ext[name]
+        // 从环境变量读取
+    } else if (System.getenv().containsKey(name))
+        return System.getenv(name)
+    return defaultValue
+}

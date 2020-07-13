@@ -1,0 +1,24 @@
+dependencies {
+    runtimeOnly('mysql:mysql-connector-java:8.0.16')
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-jooq"
+    implementation "me.jinuo.imf:hela-support:1.2.15"
+
+}
+
+apply plugin: 'hela'
+
+hela {
+    database{
+        todo {
+            packageName = "com.github.wb.todo.demo.main,po"
+            databaseUrl = "jdbc:mysql://localhost:3306"
+            databaseName = "todos_db"
+            databaseUser = "root"
+            databasePassword = "123456"
+            excludes = []
+            daos = true
+            pojoSuffix = "P_O"
+        }
+    }
+}

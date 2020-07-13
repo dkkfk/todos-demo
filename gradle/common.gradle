@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        maven { url "http://maven.jinuo.me/repository/jinuo/" }
+        maven { url "http://maven.jinuo.me/repository/jinuo-snapshot/" }
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+/*********************************  Project Config  ************************************************/
+
+group = GROUP
+version = env("version")
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+sourceSets {
+    main {
+        resources.srcDirs rootProject.file("profiles-common").absolutePath
+    }
+}
+
+
+
+/*********************************  Dependencies  ************************************************/
+
+dependencies {
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.9.+"
+    implementation 'com.google.code.gson:gson:2.+'
+    implementation 'cn.hutool:hutool-crypto:5.+'
+    implementation 'cn.hutool:hutool-http:5.+'
+    implementation 'cn.hutool:hutool-json:5.+'
+    implementation 'me.jinuo.imf:care-core:3.2.5'
+}
+
+configurations {
+    runtime.exclude group: "ch.qos.logback"
+    compile.exclude group: "ch.qos.logback"
+}
+
+pluginManager.withPlugin('kotlin') {
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-reflect"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        implementation "com.fasterxml.jackson.module:jackson-module-kotlin:+"
+    }
+
+}
+
+/*********************************  Tools  ************************************************/
+
+String env(String name, String defaultValue = "undefined") {
+    // 从启动参数读取
+    if (project.ext.has(name)) {
+        return project.ext[name]
+        // 从环境变量读取
+    } else if (System.getenv().containsKey(name))
+        return System.getenv(name)
+    return defaultValue
+}

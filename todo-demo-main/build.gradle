@@ -1,0 +1,40 @@
+apply from: "../gradle/common.gradle"
+apply from: '../gradle/springboot.gradle'
+apply from: '../gradle/springboot-web.gradle'
+apply from: '../gradle/springboot-mysql.gradle'
+
+apply plugin: 'heimdall'
+apply plugin: 'kotlin'
+apply plugin: "kotlin-spring"
+apply plugin: 'flyway-center'
+
+dependencies {
+    compileOnly "io.swagger:swagger-annotations:1.+"
+    compileOnly "javax.validation:validation-api:2.0.1.Final"
+}
+
+
+heimdall {
+
+    javaServer {
+        api {
+            file = file("../todo-demo-api/todos.v1.json")
+            modelPackage = 'com.github.wb.todo.demo.main.model'
+            apiPackage = 'com.github.wb.todo.demo.main.api'
+            modelNameSuffix = 'DTO' //选填
+        }
+    }
+
+}
+flyway_center{
+    driver = 'com.mysql.cj.jdbc.Driver'
+    db = 'todos_db'
+    env {
+        beta {
+            url = 'jdbc:mysql://localhost:3306/todos_db'
+            user = 'root'
+            password = '123456'
+            target = '2'
+        }
+    }
+}

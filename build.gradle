@@ -1,0 +1,41 @@
+
+buildscript {
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
+        maven { url "https://maven.aliyun.com/repository/spring" }
+        maven { url 'http://maven.jinuo.me/repository/jinuo/' }
+        maven { url 'http://maven.jinuo.me/repository/jinuo-snapshot/' }
+    }
+    dependencies {
+        classpath "me.jinuo.imf:hela-plugin:1.2.15"
+        classpath "me.jinuo.imf:heimdall:4.0.6"
+        classpath 'me.jinuo.backend:flyway-center:1.1.4'
+        classpath 'com.palantir.gradle.docker:gradle-docker:0.20.1'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${SPRINGBOOT_VERSION}")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION" // Required for Kotlin integration
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$KOTLIN_VERSION"
+        classpath 'me.jinuo.imf:tesseract:1.0.1'
+    }
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 8, 'hours'
+        resolutionStrategy.cacheDynamicVersionsFor 8, 'hours'
+    }
+}
+
+allprojects {
+
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
+        maven { url "https://maven.aliyun.com/repository/spring" }
+        maven { url 'http://maven.jinuo.me/repository/jinuo/' }
+        maven { url 'http://maven.jinuo.me/repository/jinuo-snapshot/' }
+    }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 8, 'hours'
+        resolutionStrategy.cacheDynamicVersionsFor 8, 'hours'
+    }
+
+}
