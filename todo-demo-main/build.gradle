@@ -11,7 +11,6 @@ apply plugin: 'flyway-center'
 
 
 dependencies {
-
     compileOnly "io.swagger:swagger-annotations:1.+"
     compileOnly "javax.validation:validation-api:2.0.1.Final"
 
@@ -43,4 +42,23 @@ flyway_center{
     }
 }
 
+
+/*********************************  build  ************************************************/
+jar {
+    baseName 'todo-demo-main'
+    version '1.0.0'
+}
+
+
+task dockerBuilder(type: Docker) {
+    applicationName = jar.baseName
+    tagVersion = jar.version
+    dockerfile = file('Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
 
