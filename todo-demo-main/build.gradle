@@ -8,9 +8,13 @@ apply plugin: 'kotlin'
 apply plugin: "kotlin-spring"
 apply plugin: 'flyway-center'
 
+
+
 dependencies {
+
     compileOnly "io.swagger:swagger-annotations:1.+"
     compileOnly "javax.validation:validation-api:2.0.1.Final"
+
 }
 
 
@@ -38,3 +42,5 @@ flyway_center{
         }
     }
 }
+
+
