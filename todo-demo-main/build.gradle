@@ -18,7 +18,6 @@ dependencies {
 
 
 heimdall {
-
     javaServer {
         api {
             file = file("../todo-demo-api/todos.v1.json")
@@ -27,8 +26,8 @@ heimdall {
             modelNameSuffix = 'DTO' //选填
         }
     }
-
 }
+
 flyway_center{
     driver = 'com.mysql.cj.jdbc.Driver'
     db = 'todos_db'
@@ -43,22 +42,4 @@ flyway_center{
 }
 
 
-/*********************************  build  ************************************************/
-jar {
-    baseName 'todo-demo-main'
-    version '1.0.0'
-}
-
-
-task dockerBuilder(type: Docker) {
-    applicationName = jar.baseName
-    tagVersion = jar.version
-    dockerfile = file('Dockerfile')
-    doFirst {
-        copy {
-            from jar
-            into stageDir
-        }
-    }
-}
 

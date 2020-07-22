@@ -1,0 +1,12 @@
+name: todo-demo-main
+repo: todo-demo-main
+build:
+  beta:
+    - chmod +x gradlew
+    - ./gradlew :todo-demo-main:dockerBuildImage -i
+  prod:
+    - chmod +x gradlew
+    - ./gradlew :todo-demo-main:dockerBuildImage -i
+release: twisted
+email:
+  - 932549144@jinuo.me

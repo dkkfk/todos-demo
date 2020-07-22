@@ -1,6 +1,7 @@
 
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'tesseract'
 
 
 
@@ -8,5 +9,5 @@ dependencies {
     implementation 'me.jinuo.imf:sortinghat-spring-boot-starter:1.2.2'
     implementation 'me.jinuo.imf:care-spring-boot-starter:3.2.5'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:$SPRINGBOOT_VERSION"
+    implementation 'me.jinuo.imf:tesseract:1.0.1'
 }
-

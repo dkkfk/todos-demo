@@ -10,8 +10,8 @@ buildscript {
     dependencies {
         classpath "me.jinuo.imf:hela-plugin:1.2.15"
         classpath "me.jinuo.imf:heimdall:4.0.6"
+        classpath 'com.palantir.gradle.docker:gradle-docker:0.20.1'
         classpath 'me.jinuo.backend:flyway-center:1.1.4'
-        classpath("se.transmode.gradle:gradle-docker:1.2")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${SPRINGBOOT_VERSION}")
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION" // Required for Kotlin integration
         classpath "org.jetbrains.kotlin:kotlin-allopen:$KOTLIN_VERSION"
